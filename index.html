@@ -66,9 +66,7 @@
   <p>Criado por João Paulo em 27/08/2023 para estudar para ditado de Alemão.</p>
   <div class="question" id="question-text"></div>
   <select id="answer-input"></select>
-  <button id="submit-button">Verificar</button>
   <div id="result"></div>
-  <button id="shuffle-button">Embaralhar e Jogar Novamente</button>
 </div>
 
 <script>
@@ -93,9 +91,7 @@ const stateCapitalPairs = [
 
 const questionText = document.getElementById('question-text');
 const answerInput = document.getElementById('answer-input');
-const submitButton = document.getElementById('submit-button');
 const result = document.getElementById('result');
-const shuffleButton = document.getElementById('shuffle-button');
 
 let currentQuestionType = '';
 let currentPairIndex = 0;
@@ -143,20 +139,15 @@ function checkAnswer() {
 
   if (selectedAnswer === correctAnswer) {
     result.textContent = 'Resposta correta!';
+    setTimeout(updateQuestion, 1000); // Aguardar 1 segundo e atualizar a pergunta
   } else {
-    result.textContent = `Resposta incorreta. A resposta correta é ${correctAnswer}.`;
+    result.textContent = 'Resposta errada, tente novamente.';
   }
 }
 
-function shuffleQuestions() {
-  stateCapitalPairs.sort(() => Math.random() - 0.5);
-  updateQuestion();
-}
+answerInput.addEventListener('change', checkAnswer);
 
-submitButton.addEventListener('click', checkAnswer);
-shuffleButton.addEventListener('click', shuffleQuestions);
-
-shuffleQuestions(); // Inicialização do jogo
+updateQuestion(); // Inicialização do jogo
 </script>
 </body>
 </html>
